@@ -1,4 +1,4 @@
-package org.springframework.cloud.servicebroker.mongodb.config;
+package org.springframework.cloud.servicebroker.config;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,17 +19,17 @@ public class CatalogConfig {
 	public Catalog catalog() {
 		return new Catalog(Collections.singletonList(
 				new ServiceDefinition(
-						"mongodb-service-broker",
-						"mongodb",
-						"A simple MongoDB service broker implementation",
+						"virusscanner-service-broker",
+						"virusscanner",
+						"A Virus Scanner that detects viruses in files",
 						true,
 						false,
 						Collections.singletonList(
-								new Plan("mongo-plan",
-										"default",
-										"This is a default mongo plan.  All services are created equally.",
+								new Plan("virusscanner-plan",
+										"free",
+										"A virus scanner for your test env. ATTENTION: It will tell you that files ending in .virus contain viruses, all other files do not.",
 										getPlanMetadata())),
-						Arrays.asList("mongodb", "document"),
+						Arrays.asList("virusscanner"),
 						getServiceDefinitionMetadata(),
 						null,
 						null)));
@@ -39,12 +39,12 @@ public class CatalogConfig {
 
 	private Map<String, Object> getServiceDefinitionMetadata() {
 		Map<String, Object> sdMetadata = new HashMap<>();
-		sdMetadata.put("displayName", "MongoDB");
-		sdMetadata.put("imageUrl", "http://info.mongodb.com/rs/mongodb/images/MongoDB_Logo_Full.png");
-		sdMetadata.put("longDescription", "MongoDB Service");
-		sdMetadata.put("providerDisplayName", "Pivotal");
-		sdMetadata.put("documentationUrl", "https://github.com/spring-cloud-samples/cloudfoundry-mongodb-service-broker");
-		sdMetadata.put("supportUrl", "https://github.com/spring-cloud-samples/cloudfoundry-mongodb-service-broker");
+		sdMetadata.put("displayName", "VirusScanner");
+		sdMetadata.put("imageUrl", "http://www.tricksforums.org/wp-content/uploads/2013/11/Online-virus-scanner.jpg");
+		sdMetadata.put("longDescription", "VirusScanner Service");
+		sdMetadata.put("providerDisplayName", "TBD");
+		sdMetadata.put("documentationUrl", "https://example.com");
+		sdMetadata.put("supportUrl", "https://example.com");
 		return sdMetadata;
 	}
 	
@@ -59,7 +59,7 @@ public class CatalogConfig {
 		Map<String,Object> costsMap = new HashMap<>();
 		
 		Map<String,Object> amount = new HashMap<>();
-		amount.put("usd", 0.0);
+		amount.put("eur", 0.0);
 	
 		costsMap.put("amount", amount);
 		costsMap.put("unit", "MONTHLY");
@@ -68,9 +68,9 @@ public class CatalogConfig {
 	}
 	
 	private List<String> getBullets() {
-		return Arrays.asList("Shared MongoDB server", 
-				"100 MB Storage (not enforced)", 
-				"40 concurrent connections (not enforced)");
+		return Arrays.asList("Test VirusScanner",
+				"1MB file limit (not enforced)",
+				"It will tell you that files ending in .virus contain viruses, all other files do not");
 	}
 	
 }

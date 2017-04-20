@@ -1,11 +1,8 @@
-package org.springframework.cloud.servicebroker.mongodb.model;
+package org.springframework.cloud.servicebroker.model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import org.springframework.cloud.servicebroker.model.CreateServiceInstanceRequest;
-import org.springframework.cloud.servicebroker.model.DeleteServiceInstanceRequest;
-import org.springframework.cloud.servicebroker.model.UpdateServiceInstanceRequest;
 
 /**
  * An instance of a ServiceDefinition.
