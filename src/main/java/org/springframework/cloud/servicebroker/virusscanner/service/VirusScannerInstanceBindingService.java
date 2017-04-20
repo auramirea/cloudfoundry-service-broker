@@ -10,13 +10,6 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Mongo impl to bind services.  Binding a service does the following:
- * creates a new user in the database (currently uses a default pwd of "password"),
- * saves the ServiceInstanceBinding info to the Mongo repository.
- *  
- * @author sgreenberg@pivotal.io
- */
 @Service
 public class VirusScannerInstanceBindingService implements ServiceInstanceBindingService {
 
@@ -31,10 +24,6 @@ public class VirusScannerInstanceBindingService implements ServiceInstanceBindin
 	public CreateServiceInstanceBindingResponse createServiceInstanceBinding(CreateServiceInstanceBindingRequest request) {
 		String bindingId = request.getBindingId();
 		String serviceInstanceId = request.getServiceInstanceId();
-
-		String database = serviceInstanceId;
-		String username = bindingId;
-		String password = RandomStringUtils.randomAlphanumeric(25);
 
 		Map<String, Object> credentials = new HashMap<>();
 		credentials.put("host", virusScannerConfig.getHost());

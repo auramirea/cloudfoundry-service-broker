@@ -14,13 +14,6 @@ import org.springframework.cloud.servicebroker.model.ServiceInstance;
 import org.springframework.cloud.servicebroker.service.ServiceInstanceService;
 import org.springframework.stereotype.Service;
 
-/**
- * Mongo impl to manage service instances.  Creating a service does the following:
- * creates a new database,
- * saves the ServiceInstance info to the Mongo repository.
- *  
- * @author sgreenberg@pivotal.io
- */
 @Service
 public class VirusScannerInstanceService implements ServiceInstanceService {
 

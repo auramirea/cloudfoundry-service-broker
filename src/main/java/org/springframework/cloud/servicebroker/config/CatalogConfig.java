@@ -35,8 +35,6 @@ public class CatalogConfig {
 						null)));
 	}
 	
-/* Used by Pivotal CF console */
-
 	private Map<String, Object> getServiceDefinitionMetadata() {
 		Map<String, Object> sdMetadata = new HashMap<>();
 		sdMetadata.put("displayName", "VirusScanner");

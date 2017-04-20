@@ -3,11 +3,6 @@ package org.springframework.cloud.servicebroker.model;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * A binding to a service instance
- *
- * @author sgreenberg@pivotal.io
- */
 public class ServiceInstanceBinding {
 
 	private String id;
