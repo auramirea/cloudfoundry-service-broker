@@ -18,12 +18,12 @@ import java.util.Map;
  * @author sgreenberg@pivotal.io
  */
 @Service
-public class VirusScannerServiceInstanceBindingService implements ServiceInstanceBindingService {
+public class VirusScannerInstanceBindingService implements ServiceInstanceBindingService {
 
 	private VirusScannerConfig virusScannerConfig;
 
 	@Autowired
-	public VirusScannerServiceInstanceBindingService(VirusScannerConfig virusScannerConfig) {
+	public VirusScannerInstanceBindingService(VirusScannerConfig virusScannerConfig) {
 		this.virusScannerConfig = virusScannerConfig;
 	}
 	
