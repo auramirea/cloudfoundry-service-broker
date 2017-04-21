@@ -28,7 +28,8 @@ public class CatalogConfig {
 								new Plan("virusscanner-plan",
 										"free",
 										"A virus scanner for your test env. ATTENTION: It will tell you that files ending in .virus contain viruses, all other files do not.",
-										getPlanMetadata())),
+										getPlanMetadata(),
+										true)),
 						Arrays.asList("virusscanner"),
 						getServiceDefinitionMetadata(),
 						null,
@@ -48,23 +49,10 @@ public class CatalogConfig {
 	
 	private Map<String,Object> getPlanMetadata() {
 		Map<String,Object> planMetadata = new HashMap<>();
-		planMetadata.put("costs", getCosts());
 		planMetadata.put("bullets", getBullets());
 		return planMetadata;
 	}
 
-	private List<Map<String,Object>> getCosts() {
-		Map<String,Object> costsMap = new HashMap<>();
-		
-		Map<String,Object> amount = new HashMap<>();
-		amount.put("eur", 0.0);
-	
-		costsMap.put("amount", amount);
-		costsMap.put("unit", "MONTHLY");
-		
-		return Collections.singletonList(costsMap);
-	}
-	
 	private List<String> getBullets() {
 		return Arrays.asList("Test VirusScanner",
 				"1MB file limit (not enforced)",

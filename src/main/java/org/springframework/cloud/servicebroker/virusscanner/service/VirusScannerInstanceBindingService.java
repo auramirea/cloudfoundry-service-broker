@@ -1,6 +1,5 @@
 package org.springframework.cloud.servicebroker.virusscanner.service;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.servicebroker.config.VirusScannerConfig;
 import org.springframework.cloud.servicebroker.model.*;
@@ -18,6 +17,7 @@ public class VirusScannerInstanceBindingService implements ServiceInstanceBindin
 	@Autowired
 	public VirusScannerInstanceBindingService(VirusScannerConfig virusScannerConfig) {
 		this.virusScannerConfig = virusScannerConfig;
+		System.out.println("[VirusScannerInstanceBindingService] " + virusScannerConfig.getHost());
 	}
 	
 	@Override
