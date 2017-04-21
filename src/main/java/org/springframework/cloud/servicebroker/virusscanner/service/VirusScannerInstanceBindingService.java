@@ -17,7 +17,6 @@ public class VirusScannerInstanceBindingService implements ServiceInstanceBindin
 	@Autowired
 	public VirusScannerInstanceBindingService(VirusScannerConfig virusScannerConfig) {
 		this.virusScannerConfig = virusScannerConfig;
-		System.out.println("[VirusScannerInstanceBindingService] " + virusScannerConfig.getHost());
 	}
 	
 	@Override
@@ -26,8 +25,7 @@ public class VirusScannerInstanceBindingService implements ServiceInstanceBindin
 		String serviceInstanceId = request.getServiceInstanceId();
 
 		Map<String, Object> credentials = new HashMap<>();
-		credentials.put("host", virusScannerConfig.getHost());
-		credentials.put("port", virusScannerConfig.getPort());
+		credentials.put("servicePath", virusScannerConfig.getServicePath());
 		credentials.put("username", virusScannerConfig.getUsername());
 		credentials.put("password", virusScannerConfig.getPassword());
 
