@@ -1,54 +1,53 @@
-Sample Spring Boot project using the [Spring Cloud - Cloud Foundry Service Broker](https://github.com/spring-cloud/spring-cloud-cloudfoundry-service-broker).
 
 # Overview
 
-This sample project uses the Spring Cloud - Cloud Foundry Service Broker to implement a MongoDB service. The MongoDB service also uses [spring-boot-data-mongodb](https://github.com/spring-projects/spring-boot/tree/master/spring-boot-starters/spring-boot-starter-data-mongodb) to persist service instances and bindings.
-
-## Getting Started
-
-You need to install and run MongoDB somewhere and configure connectivity in [application.yml](src/main/resources/application.yml).
-
-Build it:
-
-    ./gradlew build
-
-After building, you can push the broker app to Cloud Foundry or deploy it some other way and then [register it to Cloud Foundry](http://docs.cloudfoundry.org/services/managing-service-brokers.html#register-broker).
-
-
-## Enable Auth in your MongoDB instance
-
-Add the Initial Admin User:
-```
-$ mongo
-> db.createUser({ user: 'admin', pwd: 'password', roles: [{"role" : "readWriteAnyDatabase","db" : "admin"},{"role" : "userAdminAnyDatabase","db" : "admin"}] });
-```
-
-Update your mongod.conf file to enable authorization. For example, add lines like these: 
-
-```
-security:
-  authorization: enabled
-```
-
-Restart your Mongo service and test that authentication is working as expected: 
-
-`mongo --authenticationDatabase "admin" -u "admin" -p "password"`
-
-Refer to the MongoDB docs for more details: https://docs.mongodb.com/manual/tutorial/enable-authentication/
-
+Simple service broker that provides a virusscanner service with only one plan (free). 
+The virusscanner tests if a file contains a virus by checking the suffix of the filename. If the filename ends in '.virus' then 
+the file contains a virus, otherwise not.
+To demo the service broker, a test application (demoFileUploader) is used. 
 
 ## Deploy the Service Broker to Cloud Foundry
-
-The service broker is configured via environment variables, which are defined in the `manifest.yml` file. Make the necessary changes to the MongoDB config in order to connect to your Mongo instance.
-
-Push the service broker as an app to Cloud Foundry:
-`cf push`
+Build it and push it:
+```
+./gradlew build & cf push
+```
 
 Register the service broker using the default username and the password obtained from the previous step:
-`cf csb mongodb admin admin http://mongodb-service-broker.local.pcfdev.io`
+```
+cf create-service-broker generic-service-broker admin admin http://generic-service-broker.local.pcfdev.io
+```
 
-Enable access to the service broker:
-`cf enable-service-access mongodb`
+Check the list of service brokers:
+```
+cf service-brokers
+```
 
-Create a service instance:
-`cf cs mongodb default mymongodb`
+Enable access to the service broker offering for all plans:
+```
+cf enable-service-access virusscanner
+```
+
+Check that your service is in the marketplace:
+```
+cf marketplace
+```
+
+## Push the virusscanner application
+Build and push it:
+```
+./mvnw install & cf push
+```
+
+
+Create service instance:
+`cf create-service virusscanner free free-virusscanner`
+
+
+## Push the demo application
+Build and push it:
+```
+./mvnw install & cf push
+```
+
+Call the app URL and upload a file to test if it contains a virus or not.
+
