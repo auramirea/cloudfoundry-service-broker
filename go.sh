@@ -1,26 +1,37 @@
 #!/usr/bin/env bash
 
-RED='\033[0;31m'
+GREEN='\033[0;32m'
 NC='\033[0m'
 
-echo -e "${RED} -- building service broker  -- ${NC}"
+echo -e "${GREEN} -- building service broker  -- ${NC}"
 ./gradlew build
-echo -e "${RED} -- login in to cf to target the space and org -- ${NC}"
-cf login --skip-ssl-validation -a "https://api.local.pcfdev.io" -u admin -p admin -o pcfdev-org -s pcfdev-space
-echo -e "${RED} -- cf push the broker  -- ${NC}"
+echo -e "${GREEN} -- login in to local pcf installation at \"https://api.local.pcfdev.io\"  -- ${NC}"
+yes "" | cf login --skip-ssl-validation -a "https://api.local.pcfdev.io" -u admin -p admin
+
+echo -e "${GREEN} -- creating org for demo and targeting it for deploy  -- ${NC}"
+cf create-org demo-org && cf target -o demo-org
+
+echo -e "${GREEN} -- creating space for demo  -- ${NC}"
+cf create-space demo-space && cf target -s demo-space
+echo -e "${GREEN} -- target space to push demo apps  -- ${NC}"
+cf target -o demo-org -s demo-space
+
+echo -e "${GREEN} -- cf push the broker  -- ${NC}"
 cf push
-echo -e "${RED} -- creating service broker  -- ${NC}"
+echo -e "${GREEN} -- creating service broker  -- ${NC}"
 cf create-service-broker generic-service-broker admin admin http://generic-service-broker.local.pcfdev.io
 
-echo -e "${RED} -- changing directory to service folder and executing install and cf push  -- ${NC}"
+echo -e "${GREEN} -- changing directory to service folder and executing install and cf push  -- ${NC}"
 cd service/
 mvn install& cf push
 
-echo -e "${RED} -- enabling service access for virusscanner service  -- ${NC}"
+echo -e "${GREEN} -- enabling service access for virusscanner service  -- ${NC}"
 cf enable-service-access virusscanner
-echo -e "${RED} -- creating service virusscanner with a free plan  -- ${NC}"
+echo -e "${GREEN} -- creating service virusscanner with a free plan  -- ${NC}"
 cf create-service virusscanner free free-virusscanner
 
-echo -e "${RED} -- changing directory to client and executing install and cf push  -- ${NC}"
+echo -e "${GREEN} -- changing directory to client and executing install and cf push  -- ${NC}"
 cd ../client
 mvn install & cf push
+echo -e "${GREEN} -- deleting org for demo  -- ${NC}"
+yes y | cf delete-org demo-org

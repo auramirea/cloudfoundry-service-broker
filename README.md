@@ -1,5 +1,5 @@
 
-# Executing the script
+# Demo
 
 ## Clone the repo and switch to the checked out repo directory:
 
@@ -13,13 +13,6 @@ cd cloudfoundry-service-broker
 chmod +x go.sh
 . go.sh
 ```
-
-## Issues/problems running the script?
-
-### Maven errors
-
-If you get error on mvn install run with the wrapper then set you jdk home. Ex:
-```export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/```
 
 # Overview
 
@@ -59,6 +52,9 @@ Build and push it:
 ```
 ./mvnw install & cf push
 ```
+
+If you get error on mvn install run with the wrapper then set you jdk home. Ex:
+```export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/```
 
 Create service instance:
 `cf create-service virusscanner free free-virusscanner`
