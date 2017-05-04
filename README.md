@@ -1,4 +1,26 @@
 
+# Executing the script
+
+## Clone the repo and switch to the checked out repo directory:
+
+```
+git clone https://github.com/auramirea/cloudfoundry-service-broker.git
+cd cloudfoundry-service-broker
+```
+
+## Running the script:
+```
+chmod +x go.sh
+. go.sh
+```
+
+## Issues/problems running the script?
+
+### Maven errors
+
+If you get error on mvn install run with the wrapper then set you jdk home. Ex:
+```export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/```
+
 # Overview
 
 Simple service broker that provides a virusscanner service with only one plan (free). 
@@ -37,9 +59,6 @@ Build and push it:
 ```
 ./mvnw install & cf push
 ```
-
-If you get error on mvn install run with the wrapper then set you jdk home. Ex:
-```export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/```
 
 Create service instance:
 `cf create-service virusscanner free free-virusscanner`
