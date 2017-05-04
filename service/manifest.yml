@@ -1,0 +1,9 @@
+---
+applications:
+- name: virusscanner-service
+  memory: 256M
+  instances: 1
+  path: target/virusscanner-0.0.1-SNAPSHOT.jar
+  env:
+    SECURITY_USER_NAME: asdlfasdlfh-user-asdouhasdui
+    SECURITY_USER_PASSWORD: asdkjhagsdjhbas-password-askduhsukeh
