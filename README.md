@@ -38,6 +38,8 @@ Build and push it:
 ./mvnw install & cf push
 ```
 
+If you get error on mvn install run with the wrapper then set you jdk home. Ex:
+```export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/```
 
 Create service instance:
 `cf create-service virusscanner free free-virusscanner`
@@ -50,4 +52,3 @@ Build and push it:
 ```
 
 Call the app URL and upload a file to test if it contains a virus or not.
-
