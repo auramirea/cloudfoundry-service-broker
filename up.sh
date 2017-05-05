@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
 
 GREEN='\033[0;32m'
+RED='\033[0;31m'
 NC='\033[0m'
 
+orgs=$(cf orgs)
+if [[ " ${orgs[@]} " =~ "demo-org" ]]; then
+    echo -e "${RED}demo-org already present on CF instance. Exiting demo script."
+    echo -e "If you want to run this script, run the tear down script \"./down.sh\" first.${NC}"
+    exit;
+fi
 
 echo -e "${GREEN} -- building service broker  -- ${NC}"
 ./gradlew build
