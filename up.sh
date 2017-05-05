@@ -3,8 +3,6 @@
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-echo -e "${GREEN} -- deleting org for demo  -- ${NC}"
-yes y | cf delete-org demo-org
 
 echo -e "${GREEN} -- building service broker  -- ${NC}"
 ./gradlew build
@@ -18,13 +16,6 @@ echo -e "${GREEN} -- creating space for demo  -- ${NC}"
 cf create-space demo-space && cf target -s demo-space
 echo -e "${GREEN} -- target space to push demo apps  -- ${NC}"
 cf target -o demo-org -s demo-space
-
-echo -e "${GREEN} -- clean-up -- ${NC}"
-cf delete-service free-virusscanner -f
-cf delete-service-broker generic-service-broker -f
-cf delete-route local.pcfdev.io --hostname demofileuploader -f
-cf delete-route local.pcfdev.io --hostname virusscanner-service -f
-cf delete-route local.pcfdev.io --hostname generic-service-broker -f
 
 echo -e "${GREEN} -- build and cf push the broker  -- ${NC}"
 ./gradlew build
