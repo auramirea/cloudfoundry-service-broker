@@ -47,5 +47,4 @@ echo -e "${GREEN} -- changing directory to client and executing install and cf p
 cd ../client
 ./mvnw clean install
 cf push
-
-
+cd ..

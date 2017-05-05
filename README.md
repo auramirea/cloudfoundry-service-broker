@@ -8,10 +8,15 @@ git clone https://github.com/auramirea/cloudfoundry-service-broker.git
 cd cloudfoundry-service-broker
 ```
 
+## Pre-requisites
+Ensure maven is installed
+```brew install maven```
+
+ Ensure PCF dev is installed abd running
+
 ## Running the script:
 ```
-chmod +x go.sh
-. go.sh
+./up.sh
 ```
 
 # Overview
