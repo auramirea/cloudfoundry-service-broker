@@ -35,7 +35,7 @@ cf create-service-broker generic-service-broker admin admin http://generic-servi
 
 echo -e "${GREEN} -- changing directory to service folder and executing install and cf push  -- ${NC}"
 cd service/
-./mvnw install
+./mvnw clean install
 cf push
 
 echo -e "${GREEN} -- enabling service access for virusscanner service  -- ${NC}"
@@ -45,7 +45,7 @@ cf create-service virusscanner free free-virusscanner
 
 echo -e "${GREEN} -- changing directory to client and executing install and cf push  -- ${NC}"
 cd ../client
-./mvnw install
+./mvnw clean install
 cf push
 
 
