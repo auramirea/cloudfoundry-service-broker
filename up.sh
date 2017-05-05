@@ -11,8 +11,6 @@ if [[ " ${orgs[@]} " =~ "demo-org" ]]; then
     exit;
 fi
 
-echo -e "${GREEN} -- building service broker  -- ${NC}"
-./gradlew build
 echo -e "${GREEN} -- login in to local pcf installation at \"https://api.local.pcfdev.io\"  -- ${NC}"
 yes "" | cf login --skip-ssl-validation -a "https://api.local.pcfdev.io" -u admin -p admin
 
@@ -21,8 +19,6 @@ cf create-org demo-org && cf target -o demo-org
 
 echo -e "${GREEN} -- creating space for demo  -- ${NC}"
 cf create-space demo-space && cf target -s demo-space
-echo -e "${GREEN} -- target space to push demo apps  -- ${NC}"
-cf target -o demo-org -s demo-space
 
 echo -e "${GREEN} -- build and cf push the broker  -- ${NC}"
 ./gradlew build
