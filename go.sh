@@ -16,14 +16,24 @@ cf create-space demo-space && cf target -s demo-space
 echo -e "${GREEN} -- target space to push demo apps  -- ${NC}"
 cf target -o demo-org -s demo-space
 
-echo -e "${GREEN} -- cf push the broker  -- ${NC}"
+echo -e "${GREEN} -- clean-up -- ${NC}"
+cf delete-service free-virusscanner -f
+cf delete-service-broker generic-service-broker -f
+cf delete-route local.pcfdev.io --hostname demofileuploader -f
+cf delete-route local.pcfdev.io --hostname virusscanner-service -f
+cf delete-route local.pcfdev.io --hostname generic-service-broker -f
+
+echo -e "${GREEN} -- build and cf push the broker  -- ${NC}"
+./gradlew build
 cf push
+
 echo -e "${GREEN} -- creating service broker  -- ${NC}"
 cf create-service-broker generic-service-broker admin admin http://generic-service-broker.local.pcfdev.io
 
 echo -e "${GREEN} -- changing directory to service folder and executing install and cf push  -- ${NC}"
 cd service/
-mvn install& cf push
+./mvnw install
+cf push
 
 echo -e "${GREEN} -- enabling service access for virusscanner service  -- ${NC}"
 cf enable-service-access virusscanner
@@ -32,6 +42,8 @@ cf create-service virusscanner free free-virusscanner
 
 echo -e "${GREEN} -- changing directory to client and executing install and cf push  -- ${NC}"
 cd ../client
-mvn install & cf push
-echo -e "${GREEN} -- deleting org for demo  -- ${NC}"
-yes y | cf delete-org demo-org
+./mvnw install
+cf push
+
+# echo -e "${GREEN} -- deleting org for demo  -- ${NC}"
+# yes y | cf delete-org demo-org
