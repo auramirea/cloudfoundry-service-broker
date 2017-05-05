@@ -6,3 +6,5 @@ applications:
   path: target/demoFileUploader-0.0.1-SNAPSHOT.jar
   services:
    - free-virusscanner
+  env:
+    spring.profiles.active: cloud

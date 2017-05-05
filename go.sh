@@ -3,6 +3,9 @@
 GREEN='\033[0;32m'
 NC='\033[0m'
 
+echo -e "${GREEN} -- deleting org for demo  -- ${NC}"
+yes y | cf delete-org demo-org
+
 echo -e "${GREEN} -- building service broker  -- ${NC}"
 ./gradlew build
 echo -e "${GREEN} -- login in to local pcf installation at \"https://api.local.pcfdev.io\"  -- ${NC}"
@@ -45,5 +48,4 @@ cd ../client
 ./mvnw install
 cf push
 
-# echo -e "${GREEN} -- deleting org for demo  -- ${NC}"
-# yes y | cf delete-org demo-org
+
