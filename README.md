@@ -9,14 +9,26 @@ cd cloudfoundry-service-broker
 ```
 
 ## Pre-requisites
-Ensure gradle is installed
+1. Ensure gradle is installed
+2. Ensure PCF dev is installed abd running
 
- Ensure PCF dev is installed abd running
+## Running the scripts individually:
+```
+./cf-setup.sh
+./broker-deploy.sh
+cd service && ./service-deploy.sh
+cd ../client && ./client-deploy.sh
+cd ..
+```
 
-## Running the script:
+## Running the fully automated script that deploys all three apps:
 ```
 ./up.sh
 ```
+
+## Tear down script
+
+```./down.sh```
 
 # Overview
 
