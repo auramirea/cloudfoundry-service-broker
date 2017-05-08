@@ -9,8 +9,7 @@ cd cloudfoundry-service-broker
 ```
 
 ## Pre-requisites
-Ensure maven is installed
-```brew install maven```
+Ensure gradle is installed
 
  Ensure PCF dev is installed abd running
 
@@ -55,20 +54,16 @@ cf marketplace
 ## Push the virusscanner application
 Build and push it:
 ```
-./mvnw install & cf push
+./gradlew build & cf push
 ```
-
-If you get error on mvn install run with the wrapper then set you jdk home. Ex:
-```export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/```
 
 Create service instance:
 `cf create-service virusscanner free free-virusscanner`
 
-
 ## Push the demo application
 Build and push it:
 ```
-./mvnw install & cf push
+./gradlew build & cf push
 ```
 
 Call the app URL and upload a file to test if it contains a virus or not.

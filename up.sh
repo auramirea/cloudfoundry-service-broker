@@ -20,16 +20,17 @@ cf create-org demo-org && cf target -o demo-org
 echo -e "${GREEN} -- creating space for demo  -- ${NC}"
 cf create-space demo-space && cf target -s demo-space
 
-echo -e "${GREEN} -- build and cf push the broker  -- ${NC}"
+echo -e "${GREEN} -- build and deploy service broker to CF  -- ${NC}"
 ./gradlew build
 cf push
 
 echo -e "${GREEN} -- creating service broker  -- ${NC}"
 cf create-service-broker generic-service-broker admin admin http://generic-service-broker.local.pcfdev.io
 
-echo -e "${GREEN} -- changing directory to service folder and executing install and cf push  -- ${NC}"
+echo -e "${GREEN} -- changing directory to service and executing install and cf push  -- ${NC}"
 cd service/
-./mvnw clean install
+echo -e "${GREEN} -- build and deploy service to CF  -- ${NC}"
+./gradlew build
 cf push
 
 echo -e "${GREEN} -- enabling service access for virusscanner service  -- ${NC}"
@@ -37,8 +38,9 @@ cf enable-service-access virusscanner
 echo -e "${GREEN} -- creating service virusscanner with a free plan  -- ${NC}"
 cf create-service virusscanner free free-virusscanner
 
-echo -e "${GREEN} -- changing directory to client and executing install and cf push  -- ${NC}"
+echo -e "${GREEN} -- changing directory to client -- ${NC}"
 cd ../client
-./mvnw clean install
+echo -e "${GREEN} -- build and deploy client to CF  -- ${NC}"
+./gradlew build
 cf push
 cd ..
