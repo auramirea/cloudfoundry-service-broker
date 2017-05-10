@@ -7,7 +7,6 @@ echo -e "${GREEN} -- initiating clean up  -- ${NC}"
 
 cf unbind-service demoFileUploader free-virusscanner
 cf delete-service free-virusscanner -f
-cf delete-service virusscanner-service -f
 cf delete-service-broker generic-service-broker -f
 cf delete-route local.pcfdev.io --hostname demofileuploader -f
 cf delete-route local.pcfdev.io --hostname virusscanner-service -f
