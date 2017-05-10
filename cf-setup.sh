@@ -8,7 +8,7 @@ orgs=$(cf orgs)
 if [[ " ${orgs[@]} " =~ "demo-org" ]]; then
     echo -e "${RED}demo-org already present on CF instance. Exiting demo script."
     echo -e "If you want to run this script, run the tear down script \"./down.sh\" first.${NC}"
-    exit;
+    exit 1;
 fi
 
 echo -e "${GREEN} -- login in to local pcf installation at \"https://api.local.pcfdev.io\"  -- ${NC}"
