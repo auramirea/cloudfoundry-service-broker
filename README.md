@@ -15,8 +15,8 @@ cd cloudfoundry-service-broker
 ## Running the scripts individually:
 ```
 ./cf-setup.sh
-./broker-deploy.sh
 cd service && ./service-deploy.sh && cd ..
+cd broker && ./broker-deploy.sh && cd ..
 cd client && ./client-deploy.sh && cd ..
 ```
 

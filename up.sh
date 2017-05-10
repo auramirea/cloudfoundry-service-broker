@@ -5,9 +5,10 @@ NC='\033[0m'
 
 ./cf-setup.sh
 [[ $? -ne 0 ]] && exit
+cd broker
 ./broker-deploy.sh
 echo -e "${GREEN} -- changing directory to service -- ${NC}"
-cd service/
+cd ../service
 ./service-deploy.sh
 
 echo -e "${GREEN} -- changing directory to client -- ${NC}"
