@@ -9,3 +9,10 @@ cf push
 
 echo -e "${GREEN} -- creating service broker  -- ${NC}"
 cf create-service-broker generic-service-broker admin admin http://generic-service-broker.local.pcfdev.io
+
+echo -e "${GREEN} -- enabling service access for virusscanner service  -- ${NC}"
+cf enable-service-access virusscanner
+
+echo -e "${GREEN} -- creating service virusscanner with a free plan  -- ${NC}"
+cf create-service virusscanner free free-virusscanner
+

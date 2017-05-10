@@ -16,9 +16,8 @@ cd cloudfoundry-service-broker
 ```
 ./cf-setup.sh
 ./broker-deploy.sh
-cd service && ./service-deploy.sh
-cd ../client && ./client-deploy.sh
-cd ..
+cd service && ./service-deploy.sh && cd ..
+cd client && ./client-deploy.sh && cd ..
 ```
 
 ## Running the fully automated script that deploys all three apps:
