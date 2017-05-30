@@ -20,14 +20,14 @@ cd broker && ./broker-deploy.sh && cd ..
 cd client && ./client-deploy.sh && cd ..
 ```
 
+## Tear down script
+
+```./down.sh```
+
 ## Running the fully automated script that deploys all three apps:
 ```
 ./up.sh
 ```
-
-## Tear down script
-
-```./down.sh```
 
 # Overview
 
