@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package com.service.virusscanner;
+package com.service.virusscanner.controller;
 
+import com.service.virusscanner.model.VirusScanningResponse;
+import com.service.virusscanner.service.VirusScannerService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

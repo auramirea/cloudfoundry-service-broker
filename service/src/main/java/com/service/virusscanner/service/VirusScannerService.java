@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package com.service.virusscanner;
+package com.service.virusscanner.service;
 
 import com.google.common.collect.ImmutableList;
+import com.service.virusscanner.model.VirusScanningResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -24,8 +25,8 @@ import org.springframework.stereotype.Service;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import static com.service.virusscanner.Status.FILE_CLEAN;
-import static com.service.virusscanner.Status.VIRUS_FOUND;
+import static com.service.virusscanner.model.Status.FILE_CLEAN;
+import static com.service.virusscanner.model.Status.VIRUS_FOUND;
 
 @Service
 public class VirusScannerService {

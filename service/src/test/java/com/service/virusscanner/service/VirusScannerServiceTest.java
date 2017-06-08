@@ -1,5 +1,7 @@
-package com.service.virusscanner;
+package com.service.virusscanner.service;
 
+import com.service.virusscanner.model.Status;
+import com.service.virusscanner.model.VirusScanningResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,7 +10,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.core.env.Environment;
 
-import static com.service.virusscanner.VirusScannerService.SWAGGER_ENDPOINT;
+import static com.service.virusscanner.service.VirusScannerService.SWAGGER_ENDPOINT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 

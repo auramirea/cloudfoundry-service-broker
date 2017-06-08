@@ -1,6 +1,8 @@
-package com.service.virusscanner;
+package com.service.virusscanner.controller;
 
 import com.google.common.collect.ImmutableList;
+import com.service.virusscanner.model.VirusScanningResponse;
+import com.service.virusscanner.service.VirusScannerService;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,9 +14,9 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static com.service.virusscanner.Status.FILE_CLEAN;
-import static com.service.virusscanner.Status.VIRUS_FOUND;
-import static com.service.virusscanner.VirusScannerService.SWAGGER_ENDPOINT;
+import static com.service.virusscanner.model.Status.FILE_CLEAN;
+import static com.service.virusscanner.model.Status.VIRUS_FOUND;
+import static com.service.virusscanner.service.VirusScannerService.SWAGGER_ENDPOINT;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.fileUpload;

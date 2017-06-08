@@ -1,4 +1,4 @@
-package com.service.virusscanner;
+package com.service.virusscanner.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class VirusScanningResponse {
-    private  Status result;
+    private Status result;
     private List<String> messages;
     private String uri;
     private String apiDoc;
