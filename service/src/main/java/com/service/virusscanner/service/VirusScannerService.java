@@ -20,6 +20,7 @@ import com.google.common.collect.ImmutableList;
 import com.service.virusscanner.model.VirusScanningResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 
 import java.net.InetAddress;
@@ -52,16 +53,19 @@ public class VirusScannerService {
 	}
 
     private VirusScanningResponse.VirusScanningResponseBuilder virusPresentResponse(VirusScanningResponse.VirusScanningResponseBuilder responseBuilder) {
-        return responseBuilder.result(VIRUS_FOUND).messages(ImmutableList.of("M1", "M2")).apiDoc(buildSwaggerUrl());
+        return responseBuilder.result(VIRUS_FOUND).messages(ImmutableList.of("M1", "M2"))
+        .apiDoc(buildSwaggerUrl());
     }
 
-	private String buildSwaggerUrl() {
+	private Link buildSwaggerUrl() {
 		try {
-			return InetAddress.getLocalHost().getCanonicalHostName()
+			return new Link("http://"
+                    .concat(InetAddress.getLocalHost().getCanonicalHostName())
                     .concat(":")
-                    .concat(environment.getProperty(PORT)).concat(SWAGGER_ENDPOINT);
+                    .concat(environment.getProperty(PORT))
+                    .concat(SWAGGER_ENDPOINT));
 		} catch (UnknownHostException e) {
-			return "localhost:8000/".concat(SWAGGER_ENDPOINT);
+			return new Link("localhost:8000/".concat(SWAGGER_ENDPOINT));
 		}
 	}
 }

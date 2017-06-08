@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.hateoas.Link;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -72,12 +73,12 @@ public class VirusScannerControllerTest {
     @Test
     public void scan_returnsApiDocumentationUrl() throws Exception {
         VirusScanningResponse virusPresent = VirusScanningResponse.builder().result(VIRUS_FOUND)
-                .messages(ImmutableList.of("M1", "M2")).apiDoc("localhost:8000"+SWAGGER_ENDPOINT).build();
+                .messages(ImmutableList.of("M1", "M2")).apiDoc(new Link("localhost:8000"+SWAGGER_ENDPOINT)).build();
 
         when(virusScannerService.isVirus(anyString())).thenReturn(virusPresent);
 
         mockMvc.perform(fileUpload("/scan").file(FILE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("apiDoc").value(Matchers.containsString(SWAGGER_ENDPOINT)));
+                .andExpect(jsonPath("$.apiDoc.href").value(Matchers.containsString(SWAGGER_ENDPOINT)));
     }
 }

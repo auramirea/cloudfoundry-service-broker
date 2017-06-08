@@ -34,7 +34,7 @@ public class VirusScannerServiceTest {
 
         assertThat(response.getResult()).isEqualTo(Status.VIRUS_FOUND);
         assertThat(response.getMessages()).isNotEmpty();
-        assertThat(response.getApiDoc()).contains(":8000"+ SWAGGER_ENDPOINT);
+        assertThat(response.getApiDoc().getHref()).contains(":8000"+ SWAGGER_ENDPOINT);
         assertThat(response.getUri()).isNull();
 
     }
@@ -45,7 +45,7 @@ public class VirusScannerServiceTest {
 
         assertThat(response.getResult()).isEqualTo(Status.FILE_CLEAN);
         assertThat(response.getUri()).isEqualTo("https://www.google.de");
-        assertThat(response.getApiDoc()).contains(":8000"+ SWAGGER_ENDPOINT);
+        assertThat(response.getApiDoc().getHref()).contains(":8000"+ SWAGGER_ENDPOINT);
         assertThat(response.getMessages()).isNull();
     }
 }

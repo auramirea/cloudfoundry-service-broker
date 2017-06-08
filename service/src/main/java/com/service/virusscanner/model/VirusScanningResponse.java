@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.ResourceSupport;
 
 import java.util.List;
 
@@ -13,9 +15,9 @@ import java.util.List;
 @Builder
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class VirusScanningResponse {
+public class VirusScanningResponse extends ResourceSupport {
     private Status result;
     private List<String> messages;
     private String uri;
-    private String apiDoc;
+    private Link apiDoc;
 }
