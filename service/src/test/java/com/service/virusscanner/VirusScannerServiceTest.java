@@ -2,32 +2,48 @@ package com.service.virusscanner;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.core.env.Environment;
 
+import static com.service.virusscanner.VirusScannerService.SWAGGER_ENDPOINT;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
-
+@RunWith(MockitoJUnitRunner.class)
 public class VirusScannerServiceTest {
 
-    private VirusScannerService virusScannerService;
+    @Mock
+    private Environment environment;
+
+    @InjectMocks
+    private VirusScannerService virusScannerService = new VirusScannerService();
 
     @Before
     public void setUp() throws Exception {
-        virusScannerService = new VirusScannerService();
+        when(environment.getProperty(VirusScannerService.PORT)).thenReturn("8000");
     }
 
     @Test
     public void isVirus_returnsTrue_ifFileContainsVirus() {
         VirusScanningResponse response = virusScannerService.isVirus("foo.virus");
+
         assertThat(response.getResult()).isEqualTo(Status.VIRUS_FOUND);
         assertThat(response.getMessages()).isNotEmpty();
+        assertThat(response.getApiDoc()).contains(":8000"+ SWAGGER_ENDPOINT);
         assertThat(response.getUri()).isNull();
+
     }
 
     @Test
     public void isVirus_returnsFalse_ifFileNameDoesNotEndInVirus() {
         VirusScanningResponse response = virusScannerService.isVirus("foo");
+
         assertThat(response.getResult()).isEqualTo(Status.FILE_CLEAN);
-        assertThat(response.getMessages()).isNull();
         assertThat(response.getUri()).isEqualTo("https://www.google.de");
+        assertThat(response.getApiDoc()).contains(":8000"+ SWAGGER_ENDPOINT);
+        assertThat(response.getMessages()).isNull();
     }
 }

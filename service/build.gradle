@@ -22,8 +22,10 @@ dependencies {
 
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-security'
-    compile 'com.google.guava:guava:11.0.2'
+    compile 'com.google.guava:guava:22.0'
     compileOnly 'org.projectlombok:lombok:1.16.16'
+    compile 'io.springfox:springfox-swagger2:2.6.1'
+    compile 'io.springfox:springfox-swagger-ui:2.6.1'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 

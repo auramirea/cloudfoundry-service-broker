@@ -17,20 +17,50 @@
 package com.service.virusscanner;
 
 import com.google.common.collect.ImmutableList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import static com.service.virusscanner.Status.FILE_CLEAN;
 import static com.service.virusscanner.Status.VIRUS_FOUND;
 
 @Service
 public class VirusScannerService {
+
+    @Autowired
+    private Environment environment;
+
 	private static final String VIRUS_SUFFIX = ".virus";
+    public static final String PORT = "local.server.port";
+    public static final String SWAGGER_ENDPOINT = "/swagger-ui.html";
 
 	public VirusScanningResponse isVirus(final String filename) {
 		VirusScanningResponse.VirusScanningResponseBuilder responseBuilder = VirusScanningResponse.builder();
 		if(filename.endsWith(VIRUS_SUFFIX)) {
-			return responseBuilder.result(VIRUS_FOUND).messages(ImmutableList.of("M1", "M2")).build();
+			return virusPresentResponse(responseBuilder).build();
 		}
-		return responseBuilder.result(FILE_CLEAN).uri("https://www.google.de").build();
+		return fileCleanResponse(responseBuilder).build();
+	}
+
+	private VirusScanningResponse.VirusScanningResponseBuilder fileCleanResponse(VirusScanningResponse.VirusScanningResponseBuilder responseBuilder) {
+		return responseBuilder.result(FILE_CLEAN).uri("https://www.google.de")
+				.apiDoc(buildSwaggerUrl());
+	}
+
+    private VirusScanningResponse.VirusScanningResponseBuilder virusPresentResponse(VirusScanningResponse.VirusScanningResponseBuilder responseBuilder) {
+        return responseBuilder.result(VIRUS_FOUND).messages(ImmutableList.of("M1", "M2")).apiDoc(buildSwaggerUrl());
+    }
+
+	private String buildSwaggerUrl() {
+		try {
+			return InetAddress.getLocalHost().getCanonicalHostName()
+                    .concat(":")
+                    .concat(environment.getProperty(PORT)).concat(SWAGGER_ENDPOINT);
+		} catch (UnknownHostException e) {
+			return "localhost:8000/".concat(SWAGGER_ENDPOINT);
+		}
 	}
 }

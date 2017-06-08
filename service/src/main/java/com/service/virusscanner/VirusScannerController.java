@@ -16,6 +16,7 @@
 
 package com.service.virusscanner;
 
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
+@Api(description = "Determines if a file contains virus or not")
 public class VirusScannerController {
 
     private final VirusScannerService virusScannerService;

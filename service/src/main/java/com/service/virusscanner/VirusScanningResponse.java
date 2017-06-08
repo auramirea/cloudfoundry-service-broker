@@ -17,4 +17,5 @@ public class VirusScanningResponse {
     private  Status result;
     private List<String> messages;
     private String uri;
+    private String apiDoc;
 }

@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static com.service.virusscanner.Status.FILE_CLEAN;
 import static com.service.virusscanner.Status.VIRUS_FOUND;
+import static com.service.virusscanner.VirusScannerService.SWAGGER_ENDPOINT;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.fileUpload;
@@ -66,4 +67,15 @@ public class VirusScannerControllerTest {
         .andExpect(jsonPath("url").doesNotExist());
     }
 
+    @Test
+    public void scan_returnsApiDocumentationUrl() throws Exception {
+        VirusScanningResponse virusPresent = VirusScanningResponse.builder().result(VIRUS_FOUND)
+                .messages(ImmutableList.of("M1", "M2")).apiDoc("localhost:8000"+SWAGGER_ENDPOINT).build();
+
+        when(virusScannerService.isVirus(anyString())).thenReturn(virusPresent);
+
+        mockMvc.perform(fileUpload("/scan").file(FILE))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("apiDoc").value(Matchers.containsString(SWAGGER_ENDPOINT)));
+    }
 }
