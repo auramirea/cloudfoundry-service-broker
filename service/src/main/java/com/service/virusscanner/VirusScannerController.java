@@ -17,7 +17,6 @@
 package com.service.virusscanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,22 +24,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@Description("A controller for handling requests for hello messages")
 public class VirusScannerController {
 
-	private final VirusScannerService virusScannerService;
+    private final VirusScannerService virusScannerService;
 
-	@Autowired
-	public VirusScannerController(final VirusScannerService virusScannerService) {
-		this.virusScannerService = virusScannerService;
-	}
-
-
-	@PostMapping("/scan")
-	@ResponseBody
-	public boolean scan(@RequestParam("file") MultipartFile file) {
-		return virusScannerService.isVirus(file.getOriginalFilename());
-	}
+    @Autowired
+    public VirusScannerController(final VirusScannerService virusScannerService) {
+        this.virusScannerService = virusScannerService;
+    }
 
 
+    @PostMapping("/scan")
+    @ResponseBody
+    public VirusScanningResponse scan(@RequestParam("file") MultipartFile file) {
+        return virusScannerService.isVirus(file.getOriginalFilename());
+    }
 }

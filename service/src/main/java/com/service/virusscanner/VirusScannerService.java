@@ -16,14 +16,21 @@
 
 package com.service.virusscanner;
 
-import org.springframework.stereotype.Component;
+import com.google.common.collect.ImmutableList;
+import org.springframework.stereotype.Service;
 
-@Component
+import static com.service.virusscanner.Status.FILE_CLEAN;
+import static com.service.virusscanner.Status.VIRUS_FOUND;
+
+@Service
 public class VirusScannerService {
 	private static final String VIRUS_SUFFIX = ".virus";
 
-	public boolean isVirus(final String filename) {
-		return filename.endsWith(VIRUS_SUFFIX);
+	public VirusScanningResponse isVirus(final String filename) {
+		VirusScanningResponse.VirusScanningResponseBuilder responseBuilder = VirusScanningResponse.builder();
+		if(filename.endsWith(VIRUS_SUFFIX)) {
+			return responseBuilder.result(VIRUS_FOUND).messages(ImmutableList.of("M1", "M2")).build();
+		}
+		return responseBuilder.result(FILE_CLEAN).uri("https://www.google.de").build();
 	}
-
 }

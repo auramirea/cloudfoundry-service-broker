@@ -16,12 +16,18 @@ public class VirusScannerServiceTest {
     }
 
     @Test
-    public void isVirus_returnsTrue_ifFileNameEndsInVirus() {
-        assertThat(virusScannerService.isVirus("foo.virus")).isTrue();
+    public void isVirus_returnsTrue_ifFileContainsVirus() {
+        VirusScanningResponse response = virusScannerService.isVirus("foo.virus");
+        assertThat(response.getResult()).isEqualTo(Status.VIRUS_FOUND);
+        assertThat(response.getMessages()).isNotEmpty();
+        assertThat(response.getUri()).isNull();
     }
 
     @Test
     public void isVirus_returnsFalse_ifFileNameDoesNotEndInVirus() {
-        assertThat(virusScannerService.isVirus("foo")).isFalse();
+        VirusScanningResponse response = virusScannerService.isVirus("foo");
+        assertThat(response.getResult()).isEqualTo(Status.FILE_CLEAN);
+        assertThat(response.getMessages()).isNull();
+        assertThat(response.getUri()).isEqualTo("https://www.google.de");
     }
 }
