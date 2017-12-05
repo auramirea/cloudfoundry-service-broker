@@ -3,7 +3,7 @@ applications:
 - name: demoFileUploader
   memory: 256M
   instances: 1
-  path: target/demoFileUploader-0.0.1-SNAPSHOT.jar
+  path: build/libs/demoFileUploader-0.0.1.jar
   services:
    - free-virusscanner
   env:
